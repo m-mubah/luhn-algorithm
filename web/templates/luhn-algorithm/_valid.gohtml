@@ -1,0 +1,55 @@
+{{define "_valid"}}
+    <div class="col-md-12">
+        <div class="card text-white bg-success">
+            {{/*            <div class="card-header">*/}}
+            {{/*                <h5 class="text-white">Valid</h5>*/}}
+            {{/*            </div>*/}}
+            <div class="card-body">
+                <div class="row">
+                    <div class="col text-center">
+                        <img src="{{.ImgPath}}">
+                    </div>
+                    <div class="col">
+                        <h4 class="text-white text-center">{{.CardNumber}}</h4>
+                        <br>
+                        <p>This is a <b>valid</b> card number. &nbsp;
+                            <i class="fas fa-exclamation-circle"
+                               data-bs-toggle="tooltip"
+                               data-bs-placement="right"
+                               title="This card number passes the lune check.">
+                            </i>
+                        </p>
+                        <p><b>Major industry identifier:</b> {{.MII}} &nbsp;
+                            <i class="fas fa-exclamation-circle"
+                               data-bs-toggle="tooltip"
+                               data-bs-placement="right"
+                               title="The first digit of a credit card number represent the category of entity which issued the card.">
+                            </i>
+                        </p>
+                        <p><b>Issuer:</b> {{.Issuer}} &nbsp;
+                            <i class="fas fa-exclamation-circle"
+                               data-bs-toggle="tooltip"
+                               data-bs-placement="right"
+                               title="The first six digits of a card number identifies the institution that issued the card.">
+                            </i>
+                        </p>
+                        <p><b>Personal Account Number:</b> {{.PersonalAccNumber}} &nbsp;
+                            <i class="fas fa-exclamation-circle"
+                               data-bs-toggle="tooltip"
+                               data-bs-placement="right"
+                               title="The digits from the seventh number on the card to the second last number. Indicates individual account identifier.">
+                            </i>
+                        </p>
+                        <p><b>Checksum:</b> {{.Checksum}} &nbsp;
+                            <i class="fas fa-exclamation-circle"
+                               data-bs-toggle="tooltip"
+                               data-bs-placement="right"
+                               title="The last digit on the card.">
+                            </i>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{{end}}

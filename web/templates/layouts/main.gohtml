@@ -1,0 +1,88 @@
+{{define "main"}}
+
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <title>Cryptosystem</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <link rel="icon" href="/static/images/favicon.svg" type="image/x-icon">
+        <link rel="stylesheet" href="/static/fonts/fontawesome.css" type="text/css">
+        <link rel="stylesheet" href="/static/css/style.css" id="main-style-link" type="text/css">
+    </head>
+
+    <body class="">
+    {{template "header"}}
+
+    {{template "sidebar"}}
+
+    <div class="pc-container">
+        <div class="pcoded-content">
+            {{template "content" .}}
+        </div>
+    </div>
+
+    <script src="/static/js/vendor-all.min.js"></script>
+    <script src="/static/js/plugins/bootstrap.min.js"></script>
+{{/*    <script src="/static/js/plugins/feather.min.js"></script>*/}}
+    <script src="/static/js/pcoded.min.js"></script>
+    <script>
+        async function formSubmit(formId, divToUpdate, url) {
+            const form = document.getElementById(formId);
+
+            if (form.checkValidity()) {
+                let elements = [...form.elements];
+                elements = elements.filter(item => item.name !== "gorilla.csrf.Token");
+
+                class FormField {
+                    constructor(name, value) {
+                        this.Name = name;
+                        this.Value = value
+                    }
+
+                    Name;
+                    Value;
+                }
+
+                let formDataArr = [];
+
+                for (let i = 0; i < elements.length; i++) {
+                    let item = new FormField(elements[i].name, elements[i].value);
+                    formDataArr.push(item);
+                }
+
+                const formData = new FormData();
+
+                formDataArr.forEach(i => {
+                    formData.append(i.Name, i.Value);
+                })
+
+                const response = (await fetch(`/${url}`, {
+                    method: "post",
+                    body: new URLSearchParams([...formData]),
+                    headers: {"X-CSRF-Token": document.getElementsByName("gorilla.csrf.Token")[0].value}
+                })).text();
+
+                const div = document.getElementById(divToUpdate);
+                div.style.transition = "0.5s";
+                const content = await response;
+
+                setTimeout(() => {
+                    div.style.opacity = "0.0";
+                    setTimeout(() => {
+                        div.innerHTML = content;
+                        div.style.opacity = "1";
+                    }, 500);
+                });
+            } else {
+                form.reportValidity();
+            }
+        }
+    </script>
+    </body>
+
+    </html>
+
+{{end}}

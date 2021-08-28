@@ -1,0 +1,58 @@
+{{ define "content"}}
+    <div class="page-header">
+        <div class="page-block">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <div class="page-header-title">
+                        <h5 class="m-b-10">Luhn Algorithm</h5>
+                    </div>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/">Home</a></li>
+                        <li class="breadcrumb-item">Apps</li>
+                        <li class="breadcrumb-item">Credit cards - Luhn Algorithm</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="mt-4 pt-2">
+                <h5>About</h5>
+                <hr>
+                <h5>Luhn Algorithm</h5>
+                <p>Luhn algorithm or Luhn formula is a simple checksum formula used to validate a variety of
+                    identification numbers such as, credit card numbers and IMEI numbers.</p>
+                <p>
+                    It was named after its creator, IBM scientist
+                    <a href="https://en.wikipedia.org/wiki/Hans_Peter_Luhn">Hans Peter Luhn</a>.
+                </p>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Validate</h5>
+                </div>
+                <div class="card-body">
+                    <form id="luhn-validate">
+                        {{ .CsrfField}}
+                        <div class="form-group" autocomplete="off">
+                            <label class="form-label" for="cardNumber">Credit Card Number</label>
+                            <input type="text" class="form-control" name="cardNumber" id="cardNumber" pattern="^\d+$"
+                                   title="Input should only be numbers!" minlength="13" maxlength="19" required
+                                   placeholder="Enter card number">
+                        </div>
+                    </form>
+                    <button class="btn  btn-primary" onclick="formSubmit('luhn-validate','luhn-result', 'validate')">Submit
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" id="luhn-result">
+
+    </div>
+{{end}}
